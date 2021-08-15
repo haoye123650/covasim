@@ -133,8 +133,18 @@ def validate_recorded_dates(sim, requested_dates, recorded_dates, die=True):
             print(errormsg)
     return
 
+class SnapshotAdapter(snapshot(Analyzer), age_histogram(Analyzer)):
+    '''
+    this adapter is designed for get a snapshot of age_histogram.
+    
+    '''
+    def __init__(self):
+        self.snapshot = snapshot(Analyzer)
+        
+    def adapter(self):
+        self.snapshot(age_histogram(Analyzer))
 
-
+# target.1 of thr adapter
 class snapshot(Analyzer):
     '''
     Analyzer that takes a "snapshot" of the sim.people array at specified points
@@ -211,7 +221,7 @@ class snapshot(Analyzer):
         return snapshot
 
 
-
+# target.2 of adapter
 class age_histogram(Analyzer):
     '''
     Calculate statistics across age bins, including histogram plotting functionality.
