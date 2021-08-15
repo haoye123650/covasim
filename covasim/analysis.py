@@ -133,7 +133,7 @@ def validate_recorded_dates(sim, requested_dates, recorded_dates, die=True):
             print(errormsg)
     return
 
-class snapshotAdapter(snapshot(Analyzer), daily_stats(Analyzer)):
+class Snapshotadapter(snapshot(Analyzer), daily_stats(Analyzer)):
     '''
     this adapter is designed for get a snapshot of daily_stats.
     
