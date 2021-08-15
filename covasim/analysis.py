@@ -133,8 +133,18 @@ def validate_recorded_dates(sim, requested_dates, recorded_dates, die=True):
             print(errormsg)
     return
 
+class Snapshotadapter(snapshot(Analyzer), daily_stats(Analyzer)):
+    '''
+    this adapter is designed for get a snapshot of daily_stats.
+    
+    '''
+    def __init__(self):
+        self.snapshot = snapshot(Analyzer)
+        
+    def adapter(self):
+        self.snapshot(daily_stats(Analyzer))
 
-
+# target.1 of thr adapter
 class snapshot(Analyzer):
     '''
     Analyzer that takes a "snapshot" of the sim.people array at specified points
@@ -569,7 +579,7 @@ class daily_age_stats(Analyzer):
 
         return fig
 
-
+# target.2 of adapter
 class daily_stats(Analyzer):
     '''
     Print out daily statistics about the simulation. Note that this analyzer takes
