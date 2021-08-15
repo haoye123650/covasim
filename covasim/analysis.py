@@ -133,16 +133,16 @@ def validate_recorded_dates(sim, requested_dates, recorded_dates, die=True):
             print(errormsg)
     return
 
-class SnapshotAdapter(snapshot(Analyzer), age_histogram(Analyzer)):
+class SnapshotAdapter(snapshot(Analyzer), daily_stats(Analyzer)):
     '''
-    this adapter is designed for get a snapshot of age_histogram.
+    this adapter is designed for get a snapshot of daily_stats.
     
     '''
     def __init__(self):
         self.snapshot = snapshot(Analyzer)
         
     def adapter(self):
-        self.snapshot(age_histogram(Analyzer))
+        self.snapshot(daily_stats(Analyzer))
 
 # target.1 of thr adapter
 class snapshot(Analyzer):
@@ -221,7 +221,7 @@ class snapshot(Analyzer):
         return snapshot
 
 
-# target.2 of adapter
+
 class age_histogram(Analyzer):
     '''
     Calculate statistics across age bins, including histogram plotting functionality.
@@ -579,7 +579,7 @@ class daily_age_stats(Analyzer):
 
         return fig
 
-
+# target.2 of adapter
 class daily_stats(Analyzer):
     '''
     Print out daily statistics about the simulation. Note that this analyzer takes
