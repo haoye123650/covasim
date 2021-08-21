@@ -298,7 +298,9 @@ class MultiSim(cvb.FlexPretty):
             return
 
 
-    def mean(self, bounds=None, **kwargs):
+    class Iterator:
+        _reverse: bool = false
+    def mean(self, bounds=None, **kwargs, reverse):
         '''
         Alias for reduce(use_mean=True). See reduce() for full description.
 
@@ -306,6 +308,7 @@ class MultiSim(cvb.FlexPretty):
             bounds (float): multiplier on the standard deviation for the upper and lower bounds (default, 2)
             kwargs (dict): passed to reduce()
         '''
+        self._reverse = reverse
         return self.reduce(use_mean=True, bounds=bounds, **kwargs)
 
 
@@ -318,7 +321,9 @@ class MultiSim(cvb.FlexPretty):
             kwargs (dict): passed to reduce()
         '''
         return self.reduce(use_mean=False, quantiles=quantiles, **kwargs)
-
+    
+    def get_reverse_iterator(self) -> Iterator.mean:
+        return Iterator.mean(self, bounds=None, **kwargs, true)
 
     def combine(self, output=False):
         '''
